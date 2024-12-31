@@ -1,0 +1,52 @@
+# CodeRabbit configuration for automated PR reviews for a PHP project
+
+# The target branch for the pull request (e.g., master or main)
+target_branch: main
+
+# Review settings: Specify the type of checks to run
+reviews:
+  - style: true         # Enable style checks (e.g., PSR-2 or PSR-12 standards)
+  - complexity: true     # Enable complexity analysis (e.g., cyclomatic complexity for PHP)
+  - security: true       # Enable security checks (e.g., for SQL injection, XSS vulnerabilities)
+  - performance: true    # Enable performance checks (e.g., detecting inefficient code)
+  - testing: true        # Enable testing checks (e.g., PHPUnit coverage, unit tests)
+
+# Feedback settings: Customize the format and tone of the feedback
+feedback:
+  format: "summary"     # Options: "summary", "full", "brief"
+  tone: "neutral"       # Options: "friendly", "neutral", "strict"
+  include_warnings: true  # Include warnings in the feedback
+
+# Notifications: Configure the notification system
+notifications:
+  slack: true           # Enable Slack notifications
+  email: true           # Enable email notifications for reviews
+
+# Include additional settings for pull request merge
+merge:
+  auto_merge: false     # Automatically merge PRs if all checks pass
+  required_approvals: 2 # Number of approvals required before merge
+
+# Optional: You can specify custom rules or linting configurations
+custom_rules:
+  max_line_length: 120  # Maximum allowed line length for PHP code
+  allowed_file_types:
+    - .php              # Only allow PHP files for review
+    - .inc              # Include PHP include files
+
+# Optional: Define exclusions (files or directories to exclude from review)
+exclusions:
+  - "docs/*"            # Exclude documentation files
+  - "tests/*"           # Exclude test files from review
+
+# Optional: Configure PHP-specific linters or static analysis tools (e.g., PHP_CodeSniffer, PHPStan, etc.)
+tools:
+  phpcs:               # Enable PHP_CodeSniffer for style and code quality checks
+    enabled: true
+    standard: PSR12    # PSR-12 coding standard for PHP
+  phpstan:             # Enable PHPStan for static analysis
+    enabled: true
+    level: 5           # PHPStan level for deeper analysis (1-8, with 8 being most strict)
+  phpunit:             # Enable PHPUnit for testing checks
+    enabled: true
+    coverage: true     # Ensure that test coverage is included in the review process
